@@ -18,14 +18,14 @@ pipeline {
  }
  }
  }
- stage(‘Running image’) {
+ stage(‘Running Docker image’) {
  steps{
  script {
  sh “docker run ${imagename}:latest”
  }
  }
  }
- stage(‘Deploy Image’) {
+ stage(‘Deploy Docker Image to Docker Hub’) {
  steps{
  script {
  docker.withRegistry( ‘’, registryCredential ) {
