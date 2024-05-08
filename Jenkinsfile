@@ -8,7 +8,7 @@ pipeline {
  stages {
  stage(‘Cloning Git Repo’) {
  steps {
- git([url: ‘https://github.com/ruthra2292/startbootstrap-resume.git', branch: ‘master’])
+ git([url: ‘https://github.com/ruthra2292/sl_Docker_Jenkins.git', branch: ‘master’])
  }
  }
  stage(‘Building Docker image’) {
