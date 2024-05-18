@@ -16,7 +16,7 @@ pipeline {
          stage('Building Image') {
             steps {
                 script {
-                    dockerImage = docker.build personal_portfolio:1.0
+                    dockerImage = docker.build imagename
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Running Image') {
             steps {
                 script {
-                    sh  docker run personal_portfolio:1.0
+                    sh  "docker run ${imagename}:latest"
                 }
             }
         }
