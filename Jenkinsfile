@@ -7,33 +7,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Cloning Git Repo') {
+                
+         stage('Building Docker Image') {
             steps {
-                git 'https://github.com/ruthra2292/sl_Docker_Jenkins.git'
+                sh 'docker build -t selvam2292/personal-portfolio:$(BUILD_NUMBER) .'
+                }
             }
         }
-        
-         stage('Building Image') {
+       
+        stage('Push image to docker hub ') {
             steps {
-                script {
-                    dockerImage = docker.build imagename
+                sh  'docker push selvam2292/personal_portfolio:$BUILD_NUMBER'
                 }
             }
         }
         
-        stage('Running Image') {
-            steps {
-                script {
-                    sh  "docker run ${imagename}:latest"
-                }
-            }
-        }
-        
-        stage('Deploy our image') {
+        stage('Deploy our application') {
             steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
+                sh 'docker run -d --name docker_project -p 8000:80 selvam2292/personal_portfolio:$BUILD_NUMBER'
+
                     }
                 }
             }
