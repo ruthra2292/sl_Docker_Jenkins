@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( '', '1f1b7c40-4dbc-444a-a9b6-a71d3c8f9509' ) {
-                        dockerImage.push()
+                        sh 'docker push selvam2292/personal_portfolio:${BUILD_NUMBER}'
                     }
                 }
             }
