@@ -15,8 +15,9 @@ pipeline {
             }        
         stage('Push image to docker hub ') {
             steps {
-                script{
-                    docker.withRegistry(",'dockerhub-credentials') {dockerImage.push()}
+                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                  sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                  sh 'docker push selvam2292/personal_portfolio:${BUILD_NUMBER}'
                 }
             }        
         stage('Deploy our application') {
