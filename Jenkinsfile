@@ -15,10 +15,10 @@ pipeline {
             }        
         stage('Push image to docker hub ') {
             steps {
-                 withCredentials([usernamePassword(credentialsId: 1f1b7c40-4dbc-444a-a9b6-a71d3c8f9509, passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                  sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                  sh 'docker push selvam2292/personal_portfolio:${BUILD_NUMBER}'
-                 }
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
                 }
             }        
         stage('Deploy our application') {
