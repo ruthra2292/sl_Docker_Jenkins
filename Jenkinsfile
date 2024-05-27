@@ -20,7 +20,8 @@ pipeline {
                         dockerImage.push()
                     }
                 }
-            }        
+            }
+        }
         stage('Deploy our application') {
             steps{
                 sh 'docker run -d --name docker_project -p 8000:80 selvam2292/personal_portfolio:${BUILD_NUMBER}'
@@ -28,4 +29,3 @@ pipeline {
                     }
                 }
     }
-}
