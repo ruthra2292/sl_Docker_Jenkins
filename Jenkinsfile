@@ -16,9 +16,7 @@ pipeline {
         stage('Push image to docker hub ') {
             steps {
                 script{
-                    docker.withRegistry(",'dockerhub-credentials') {
-                                        dockerImage.push()
-                    }
+                    docker.withRegistry(",'dockerhub-credentials') {dockerImage.push()}
                 }
             }        
         stage('Deploy our application') {
