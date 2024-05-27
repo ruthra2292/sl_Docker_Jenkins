@@ -15,7 +15,10 @@ pipeline {
             }        
         stage('Push image to docker hub ') {
             steps {
-                sh  'docker push selvam2292/personal_portfolio:${BUILD_NUMBER}'
+                script{
+                    docker.withRegistry(",'dockerhub-credentials') {
+                                        dockerImage.push()
+                    }
                 }
             }        
         stage('Deploy our application') {
